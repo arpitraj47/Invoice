@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Generate Invoice</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1 class="mt-5">Generate Invoice</h1>
+        <form id="invoiceForm" method="POST" action="">
+            {% csrf_token %}
+            <h2>Seller Information</h2>
+            <div class="form-group">
+                <label for="seller_name">Name:</label>
+                <input type="text" class="form-control" id="seller_name" name="seller_name" required>
+            </div>
+            <div class="form-group">
+                <label for="seller_phone">Phone:</label>
+                <input type="text" class="form-control" id="seller_phone" name="seller_phone" required>
+            </div>
+            <div class="form-group">
+                <label for="seller_address">Address:</label>
+                <textarea class="form-control" id="seller_address" name="seller_address" required></textarea>
+            </div>
+            <h2>Buyer Information</h2>
+            <div class="form-group">
+                <label for="buyer_name">Name:</label>
+                <input type="text" class="form-control" id="buyer_name" name="buyer_name" required>
+            </div>
+            <div class="form-group">
+                <label for="buyer_phone">Phone:</label>
+                <input type="text" class="form-control" id="buyer_phone" name="buyer_phone" required>
+            </div>
+            <div class="form-group">
+                <label for="buyer_address">Address:</label>
+                <textarea class="form-control" id="buyer_address" name="buyer_address" required></textarea>
+            </div>
+            <h2>Items</h2>
+            <div id="items-container">
+                <div class="item">
+                    <div class="form-group">
+                        <label for="item_name_0">Name:</label>
+                        <input type="text" class="form-control" id="item_name_0" name="item_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="item_price_0">Price:</label>
+                        <input type="text" class="form-control" id="item_price_0" name="item_price" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="item_tax_0">Tax:</label>
+                        <input type="text" class="form-control" id="item_tax_0" name="item_tax" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="item_quantity_0">Quantity:</label>
+                        <input type="text" class="form-control" id="item_quantity_0" name="item_quantity" required>
+                    </div>
+                </div>
+            </div>
+            <button type="button" class="btn btn-primary" onclick="addItem()">Add Item</button>
+            <br>
+            <br>
+            <button type="submit" class="btn btn-success">Generate Invoice</button>
+        </form>
+    </div>
+
+    <script>
+        let itemIndex = 1;
+
+        function addItem() {
+            const itemsContainer = document.getElementById('items-container');
+            const itemTemplate = `
+                <div class="item">
+                    <div class="form-group">
+                        <label for="item_name_${itemIndex}">Name:</label>
+                        <input type="text" class="form-control" id="item_name_${itemIndex}" name="item_name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="item_price_${itemIndex}">Price:</label>
+                        <input type="text" class="form-control" id="item_price_${itemIndex}" name="item_price" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="item_tax_${itemIndex}">Tax:</label>
+                        <input type="text" class="form-control" id="item_tax_${itemIndex}" name="item_tax" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="item_quantity_${itemIndex}">Quantity:</label>
+                        <input type="text" class="form-control" id="item_quantity_${itemIndex}" name="item_quantity" required>
+                    </div>
+                </div>
+            `;
+            itemsContainer.insertAdjacentHTML('beforeend', itemTemplate);
+            itemIndex++;
+        }
+    </script>
+</body>
+</html>

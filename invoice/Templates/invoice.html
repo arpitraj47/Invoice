@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Invoice</title>
+    <style>
+        /* Add custom styles for the invoice */
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Invoice</h1>
+        <h2>Seller Information</h2>
+        <p><strong>Name:</strong> {{ invoice.seller.name }}</p>
+        <p><strong>Phone:</strong> {{ invoice.seller.phone }}</p>
+        <p><strong>Address:</strong> {{ invoice.seller.address }}</p>
+        <h2>Buyer Information</h2>
+        <p><strong>Name:</strong> {{ invoice.buyer.name }}</p>
+        <p><strong>Phone:</strong> {{ invoice.buyer.phone }}</p>
+        <p><strong>Address:</strong> {{ invoice.buyer.address }}</p>
+        <h2>Items</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Tax</th>
+                    <th>Quantity</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in invoice.items.all %}
+                <tr>
+                    <td>{{ item.name }}</td>
+                    <td>{{ item.price }}</td>
+                    <td>{{ item.tax }}</td>
+                    <td>{{ item.quantity }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <p><strong>Created at:</strong> {{ invoice.created_at }}</p>
+    </div>
+</body>
+</html>
